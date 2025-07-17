@@ -105,8 +105,6 @@ export class SpaceXService {
         totalDocs: z.number(),
       })
     );
-    
-    console.log('Past launches found:', queryResult.docs.length, 'of', queryResult.totalDocs);
     return queryResult.docs;
   }
 }

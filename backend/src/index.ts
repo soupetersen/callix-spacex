@@ -9,7 +9,7 @@ import routes from './routes/routes';
 dotenv.config();
 
 const app: express.Application = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 app.use(helmet());
 app.use(cors({

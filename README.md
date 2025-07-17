@@ -16,7 +16,7 @@ pnpm install
 
 ### Executando em Desenvolvimento
 ```bash
-# Terminal 1 - Backend (porta 3001)
+# Terminal 1 - Backend (porta 3002)
 cd backend
 pnpm dev
 

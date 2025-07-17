@@ -112,6 +112,7 @@ function App() {
                 <Button
                   variant="outline"
                   size="sm"
+                  className="hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-200 cursor-pointer transform hover:scale-105"
                   onClick={() =>
                     launch.links?.webcast &&
                     window.open(launch.links.webcast, '_blank')

@@ -28,6 +28,14 @@ jobs:
       run: |
         scp -r * ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }}:/home/${{ secrets.VPS_USERNAME }}/spacex/
         
+    - name: Setup nginx config
+      run: |
+        ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }} << 'EOF'
+        sudo cp /root/spacex/nginx-spacex.conf /etc/nginx/sites-available/spacex
+        sudo ln -sf /etc/nginx/sites-available/spacex /etc/nginx/sites-enabled/spacex
+        sudo nginx -t && sudo systemctl reload nginx
+        EOF
+        
     - name: Deployment Summary
       run: |
-        echo "Files uploaded to VPS!"
+        echo "✅ Files uploaded to VPS!"

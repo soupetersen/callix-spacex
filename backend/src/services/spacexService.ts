@@ -77,6 +77,8 @@ export class SpaceXService {
       { upcoming: true },
       { 
         sort: { date_utc: 'asc' },
+        limit: 100,
+        page: 1
       },
       z.object({
         docs: z.array(launchSchema),
@@ -95,6 +97,8 @@ export class SpaceXService {
       { upcoming: false },
       { 
         sort: { date_utc: 'desc' },
+        limit: 100,
+        page: 1
       },
       z.object({
         docs: z.array(launchSchema),

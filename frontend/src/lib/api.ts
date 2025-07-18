@@ -1,55 +1,50 @@
-import { z } from 'zod'
+import type { SpacexLaunch } from '../types/api'
 
 export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3002/api/spacex'
 
-class ApiError extends Error {
-  public status: number
-  
-  constructor(status: number, message: string) {
-    super(message)
-    this.name = 'ApiError'
-    this.status = status
-  }
+interface ApiResponse<T> {
+  data: T
 }
 
-export async function apiCall<T>(
-  endpoint: string,
-  options: RequestInit = {},
-  schema?: z.ZodSchema<T>
-): Promise<T> {
-  const url = `${API_BASE_URL}${endpoint}`
-  
-  try {
-    const response = await fetch(url, {
-      headers: {
-        'Content-Type': 'application/json',
-        ...options.headers,
-      },
-      ...options,
-    })
-
-    if (!response.ok) {
-      throw new ApiError(response.status, `HTTP error! status: ${response.status}`)
-    }
-
-    const data = await response.json()
-
-    if (schema) {
-      return schema.parse(data)
-    }
-
-    return data
-  } catch (error) {
-    if (error instanceof ApiError) {
-      throw error
-    }
-    
-    if (error instanceof z.ZodError) {
-      throw new Error(`API response validation failed: ${error.message}`)
-    }
-
-    throw new Error(`Network error: ${error instanceof Error ? error.message : 'Unknown error'}`)
+export async function getNextLaunch(): Promise<SpacexLaunch> {
+  const response = await fetch(`${API_BASE_URL}/next-launch`)
+  if (!response.ok) {
+    throw new Error('Erro ao carregar próximo lançamento')
   }
+  const result: ApiResponse<SpacexLaunch> = await response.json()
+  return result.data
 }
 
-export { ApiError }
+export async function getLatestLaunch(): Promise<SpacexLaunch> {
+  const response = await fetch(`${API_BASE_URL}/latest-launch`)
+  if (!response.ok) {
+    throw new Error('Erro ao carregar último lançamento')
+  }
+  const result: ApiResponse<SpacexLaunch> = await response.json()
+  return result.data
+}
+
+export async function getUpcomingLaunches(): Promise<SpacexLaunch[]> {
+  const response = await fetch(`${API_BASE_URL}/upcoming-launches`)
+  if (!response.ok) {
+    throw new Error('Erro ao carregar próximos lançamentos')
+  }
+  const result: ApiResponse<SpacexLaunch[]> = await response.json()
+  return result.data
+}
+
+export async function getPastLaunches(): Promise<SpacexLaunch[]> {
+  const response = await fetch(`${API_BASE_URL}/past-launches`)
+  if (!response.ok) {
+    throw new Error('Erro ao carregar lançamentos passados')
+  }
+  const result: ApiResponse<SpacexLaunch[]> = await response.json()
+  return result.data
+}
+
+export const spacexApi = {
+  getNextLaunch,
+  getLatestLaunch,
+  getUpcomingLaunches,
+  getPastLaunches,
+}

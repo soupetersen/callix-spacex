@@ -27,7 +27,7 @@ pnpm dev
 
 Acesse http://localhost:5173 para visualizar a aplicação.
 
-## Endpoints da API
+### Endpoints da API
 
 O backend expõe uma API REST que consome a SpaceX API v5 e fornece os seguintes endpoints:
 
@@ -45,3 +45,17 @@ Retorna uma lista de lançamentos passados.
 
 ### `GET /api/health`
 Endpoint de saúde da API para monitoramento.
+
+### Variações da aplicação utilizando mida.so
+
+#### Página controle
+
+Aplicação original sem nenhuma modificação.
+
+![Image](./images/control.png)
+
+#### Variant 1
+
+Nessa variante, o título e subtitulo foram alterados juntamente com a cor do botões.
+
+![Image](./images/variant_1.png)

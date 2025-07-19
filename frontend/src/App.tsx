@@ -1,9 +1,10 @@
 import { useSpacex } from './hooks/useSpacex'
-import './styles/App.css'
+import { usePosthog } from './hooks/usePosthog'
 import { Header } from './components/Header'
 import { LaunchSection } from './components/LaunchSection'
 import { Button } from './components/ui/button'
 import { RefreshCw } from 'lucide-react'
+import './styles/App.css'
 
 function App() {
   const {
@@ -15,6 +16,8 @@ function App() {
     error,
     refetch,
   } = useSpacex()
+
+  const { buttonColor, variant } = usePosthog()
 
   const isAnyLoading =
     loading.nextLaunch ||
@@ -31,7 +34,10 @@ function App() {
           <Button
             onClick={refetch}
             disabled={isAnyLoading}
+            variant={buttonColor === 'green' ? 'green' : 'default'}
             className="flex items-center gap-2 cursor-pointer"
+            data-testid="refresh-button"
+            data-variant={variant}
           >
             <RefreshCw
               className={`h-4 w-4 ${isAnyLoading ? 'animate-spin' : ''}`}

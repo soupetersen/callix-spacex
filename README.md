@@ -59,3 +59,8 @@ Aplicação original sem nenhuma modificação.
 Nessa variante, o texto do titulo foi alterado e a cor do botão de atualizar ficou verde.
 
 ![Image](./images/variant_1.png)
+
+
+### Heatmap do hotjar
+
+![Image](./images/hotjar.jpg)

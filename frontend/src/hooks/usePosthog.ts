@@ -5,8 +5,6 @@ export const usePosthog = () => {
   
   const finalVariant = variant === 'variant1' ? 'variant1' : 'control'
   
-  console.log('🎯 PostHog A/B Test:', { rawVariant: variant, finalVariant })
-
   return {
     variant: finalVariant,
     isLoading: false,

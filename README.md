@@ -56,6 +56,6 @@ Aplicação original sem nenhuma modificação.
 
 #### Variant 1
 
-Nessa variante, o título e subtitulo foram alterados juntamente com a cor do botões.
+Nessa variante, o texto do titulo foi alterado e a cor do botão de atualizar ficou verde.
 
 ![Image](./images/variant_1.png)
